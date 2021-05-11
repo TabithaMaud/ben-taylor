@@ -1,0 +1,22 @@
+.detail {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.detail h2 {
+  font-size: 36px;
+}
+
+.detail p {
+  line-height: 2;
+}
+
+.comments h3 {
+  font-size: 24px;
+}
+
+.comments {
+  background: #f1f0f0;
+  padding: 20px;
+}

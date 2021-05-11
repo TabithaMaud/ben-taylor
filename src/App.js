@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import PostList from "./components/PostList";
+import PostDetail from "./components/PostDetail";
+import { Route } from "react-router-dom";
 
 function App() {
+  // fetch('https://jsonplaceholder.typicode.com/posts')
+  const [posts, setPosts] = useState([]);
+
+  const getData = () => {
+    fetch("https://jsonplaceholder.typicode.com/posts")
+      .then((res) => res.json())
+      .then((res) => setPosts(res));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <main>
+        <Route
+          path="/"
+          exact
+          render={() => {
+            return <PostList posts={posts} />;
+          }}
+        />
+        <Route
+          path="/post/:id"
+          render={(routerProps) => {
+            return <PostDetail match={routerProps.match} />;
+          }}
+          // render={PostDetail}
+        />
+      </main>
     </div>
   );
 }
